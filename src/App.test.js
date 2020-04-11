@@ -1,9 +1,18 @@
 import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import { shallow } from 'enzyme';
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+describe('App', () => {
+  let App
+  , wrapper
+  ;
+
+  beforeEach(() => {
+    jest.resetModules();
+
+    App = require('./App').default;
+  });
+
+  it('renders a header', () => {
+    wrapper = shallow(<App />);
+  });
 });
