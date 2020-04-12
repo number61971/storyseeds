@@ -1,5 +1,5 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { render } from 'enzyme';
 
 describe('App', () => {
   let App
@@ -13,6 +13,6 @@ describe('App', () => {
   });
 
   it('renders a header', () => {
-    wrapper = shallow(<App />);
+    wrapper = render(<App />);
   });
 });

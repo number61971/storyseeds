@@ -5,20 +5,22 @@ import Box from '@material-ui/core/Box';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-  },
-  toolbar: {
-    paddingTop: theme.spacing(1),
-    paddingBottom: theme.spacing(2),
-  },
-  title: {
-    width: '100%',
-    display: 'flex',
-    justifyContent: 'center',
-  },
-}));
+const useStyles = makeStyles((theme) => {
+  return {
+    root: {
+      flexGrow: 1,
+    },
+    toolbar: {
+      paddingTop: theme.spacing(1),
+      paddingBottom: theme.spacing(2),
+    },
+    title: {
+      width: '100%',
+      display: 'flex',
+      justifyContent: 'center',
+    },
+  };
+});
 
 function App() {
   const classes = useStyles();
