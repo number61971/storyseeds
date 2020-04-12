@@ -1,18 +1,10 @@
 import React from 'react';
 import { render } from 'enzyme';
+import App from './App';
 
 describe('App', () => {
-  let App
-  , wrapper
-  ;
-
-  beforeEach(() => {
-    jest.resetModules();
-
-    App = require('./App').default;
-  });
-
   it('renders a header', () => {
-    wrapper = render(<App />);
+    const wrapper = render(<App />);
+    expect(wrapper.text()).toMatch('Story Seeds');
   });
 });
