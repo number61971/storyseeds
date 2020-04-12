@@ -4,6 +4,7 @@ import AppBar from '@material-ui/core/AppBar';
 import Box from '@material-ui/core/Box';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
+import SlotMachine from './SlotMachine';
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -36,6 +37,7 @@ function App() {
           </Box>
         </Toolbar>
       </AppBar>
+      <SlotMachine />
     </div>
   );
 }
