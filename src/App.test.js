@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import App from './App';
 import AppBar from '@material-ui/core/AppBar';
-import SlotMachine from './SlotMachine';
+import SlotMachine from './slotMachine/SlotMachine';
 
 let wrapper;
 
