@@ -1,12 +1,12 @@
 import React from 'react';
 import { shallow } from 'enzyme';
-import SlotMachine from './SlotMachine';
+import StorySeedsSlotMachine from './StorySeedsSlotMachine';
 
 let wrapper;
 
 describe('SlotMachine', () => {
   it('renders a slot machine', () => {
-    wrapper = shallow(<SlotMachine />);
+    wrapper = shallow(<StorySeedslotMachine />);
     expect(wrapper.text()).toMatch('Slot Machine');
   });
 });
