@@ -1,41 +1,23 @@
-import React, { Fragment, useEffect } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-
-const useStyles = makeStyles((theme) => {
-  return {
-    slotMachine: {
-      fontSize: 70,
-      height: 90,
-      overflow: 'hidden'
-    }
-  };
-});
+import React, { Fragment } from 'react';
+import SlotReel from './SlotReel';
+import { adjectives, nouns } from './terms';
 
 function StorySeedsSlotMachine() {
-  useEffect(() => {
-    const slotMachine = document.querySelector('#slot-machine');
-    const config = {
-      active: 1,
-      delay: 500,
-      auto: 1500,
-      randomize() {
-        return this.nextIndex;
-      }
-    };
-    new window.SlotMachine(slotMachine, config);
-  });
+  const adjReelProps = {
+    id: 'adjectives-reel',
+    items: adjectives
+  };
 
-  const classes = useStyles();
+  const nounsReelProps = {
+    id: 'nouns-reel',
+    items: nouns
+  };
 
   return (
-    <div id="slot-machine" className={classes.slotMachine}>
-      <div>Red</div>
-      <div>Orange</div>
-      <div>Yellow</div>
-      <div>Green</div>
-      <div>Blue</div>
-      <div>Violet</div>
-    </div>
+    <Fragment>
+      <SlotReel { ...adjReelProps } />
+      <SlotReel { ...nounsReelProps } />
+    </Fragment>
   );
 }
 
