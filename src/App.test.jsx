@@ -2,7 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import App from './App';
 import AppBar from '@material-ui/core/AppBar';
-import SlotMachine from './slotMachine/SlotMachine';
+import StorySeedsSlotMachine from './slotMachine/StorySeedsSlotMachine';
 
 let wrapper;
 
@@ -13,9 +13,9 @@ describe('App', () => {
     expect(appBar.text()).toMatch('Story Seeds');
   });
 
-  it('renders a slot machine', () => {
+  it('renders the story seeds slot machine', () => {
     wrapper = shallow(<App />);
-    const slotMachine = wrapper.find(SlotMachine);
+    const slotMachine = wrapper.find(StorySeedsSlotMachine);
     expect(slotMachine.length).toEqual(1);
   });
 });
