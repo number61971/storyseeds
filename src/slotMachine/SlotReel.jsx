@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import randomIndex from './random';
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -13,16 +14,18 @@ const useStyles = makeStyles((theme) => {
 
 function SlotReel(props) {
   useEffect(() => {
-    const slotMachine = document.querySelector(`#${props.id}`);
+    const { id, items } = props;
+
     const config = {
-      active: 1,
-      delay: 500,
-      auto: 1500,
-      randomize() {
-        return this.nextIndex;
-      }
+      active: randomIndex(0, items.length),
     };
-    new window.SlotMachine(slotMachine, config);
+
+    const slotMachineElem = document.querySelector(`#${id}`);
+    const slotMachine = new window.SlotMachine(slotMachineElem, config);
+
+    slotMachineElem.addEventListener('shuffle-slot-machine', (event) => {
+      setTimeout(() => { slotMachine.shuffle(5) }, event.detail.delay);
+    });
   });
 
   const classes = useStyles();
@@ -30,7 +33,11 @@ function SlotReel(props) {
 
   return (
     <div id={id} className={classes.slotReel}>
-      { items.map(item => <div>{item}</div>) }
+      {
+        items.map((item, index) => {
+          return <div key={index}>{item}</div>;
+        })
+      }
     </div>
   );
 }
