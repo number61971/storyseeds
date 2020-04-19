@@ -1,34 +1,21 @@
 import React, { Fragment } from 'react';
-import Button from '@material-ui/core/Button';
+import ActionButton from './ActionButton';
+import SlotReel from './SlotReel';
 
 function SlotMachine(props) {
-  const { slotReels } = props;
+  const { slotReels, actionProps } = props;
+  const slotReelIds = slotReels.map(slotReel => slotReel.id);
+  const fullActionProps = { ...actionProps, slotReelIds };
 
-  const clickHandler = (event) => {
-    slotReels.forEach((slotReel, index) => {
-      const delay = index * 500;
-      const shuffleEvent = new CustomEvent(
-        'shuffle-slot-machine',
-        { detail: { delay } }
-      );
-      const slotReelElem = document.querySelector(`#${slotReel.props.id}`);
-      slotReelElem.dispatchEvent(shuffleEvent);
-    });
-  };
 
   return (
     <Fragment>
       {
-        slotReels.map((slotReel, index) => {
-          return <div key={index}>{slotReel}</div>;
+        slotReels.map((slotReelProps, index) => {
+          return <SlotReel key={ index } { ...slotReelProps } />;
         })
       }
-      <Button
-        onClick={clickHandler}
-        variant="contained"
-      >
-        Shuffle
-      </Button>
+      <ActionButton { ...fullActionProps } />
     </Fragment>
   );
 }

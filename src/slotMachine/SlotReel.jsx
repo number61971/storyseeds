@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import randomIndex from './random';
+import { SHUFFLE_EVENT } from './shuffleEvent';
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -23,7 +24,7 @@ function SlotReel(props) {
     const slotMachineElem = document.querySelector(`#${id}`);
     const slotMachine = new window.SlotMachine(slotMachineElem, config);
 
-    slotMachineElem.addEventListener('shuffle-slot-machine', (event) => {
+    slotMachineElem.addEventListener(SHUFFLE_EVENT, (event) => {
       setTimeout(() => { slotMachine.shuffle(5) }, event.detail.delay);
     });
   });
