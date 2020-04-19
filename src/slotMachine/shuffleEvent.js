@@ -1,8 +1,14 @@
 export const SHUFFLE_EVENT = 'shuffle-slot-machine';
 
-export default function shuffleEvent(delay) {
+function shuffleEvent(delay) {
   return new CustomEvent(
     SHUFFLE_EVENT,
     { detail: { delay } }
   );
 }
+
+const shuffleEventModule = {
+  shuffleEvent
+};
+
+export default shuffleEventModule;

@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import Button from '@material-ui/core/Button';
-import shuffleEvent from './shuffleEvent';
+import shuffleEventModule from './shuffleEvent';
 
 function ActionButton(props) {
   const { slotReelIds } = props;
@@ -10,7 +10,9 @@ function ActionButton(props) {
     slotReelIds.forEach((id, index) => {
       const delay = index * 500;
       const slotReelElem = document.querySelector(`#${id}`);
-      slotReelElem.dispatchEvent(shuffleEvent(delay));
+      slotReelElem.dispatchEvent(
+        shuffleEventModule.shuffleEvent(delay)
+      );
     });
   };
 
