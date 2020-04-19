@@ -7,7 +7,6 @@ function SlotMachine(props) {
   const slotReelIds = slotReels.map(slotReel => slotReel.id);
   const fullActionProps = { ...actionProps, slotReelIds };
 
-
   return (
     <Fragment>
       {
