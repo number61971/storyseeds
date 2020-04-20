@@ -27,7 +27,7 @@ function App() {
   const classes = useStyles();
 
   return (
-    <div className={classes.root}>
+    <Box className={classes.root}>
       <AppBar position="static">
         <Toolbar className={classes.toolbar}>
           <Box className={classes.title}>
@@ -38,7 +38,7 @@ function App() {
         </Toolbar>
       </AppBar>
       <StorySeedsSlotMachine />
-    </div>
+    </Box>
   );
 }
 

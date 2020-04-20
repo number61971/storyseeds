@@ -2,12 +2,31 @@ import 'typeface-roboto';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
+
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import App from './App';
+
 import * as serviceWorker from './serviceWorker';
+
+const appTheme = createMuiTheme({
+  overrides: {
+    MuiCssBaseline: {
+      '@global': {
+        body: {
+          backgroundColor: '#e0e0e0',
+        },
+      },
+    },
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <MuiThemeProvider theme={appTheme}>
+      <CssBaseline />
+      <App />
+    </MuiThemeProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

@@ -1,4 +1,5 @@
-import React, { Fragment } from 'react';
+import React from 'react';
+import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
 import shuffleEventModule from './shuffleEvent';
 
@@ -17,11 +18,16 @@ function ActionButton(props) {
   };
 
   return (
-    <Fragment>
-      <Button onClick={clickHandler} variant="contained">
+    <Box>
+      <Button
+        color="secondary"
+        onClick={clickHandler}
+        size="large"
+        variant="contained"
+      >
         {buttonLabel}
       </Button>
-    </Fragment>
+    </Box>
   );
 }
 
