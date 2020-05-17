@@ -37,8 +37,18 @@ function SlotReel(props) {
     const slotMachineElem = document.querySelector(`#${id}`);
     const slotMachine = new window.SlotMachine(slotMachineElem, config);
 
+    const spinningReelSound = new Audio('/audio/spinning_reel.mp3');
+
+    const spinStopSound = new Audio('/audio/slot_stop.mp3');
+    const onComplete = () => { spinStopSound.play() };
+
     slotMachineElem.addEventListener(SHUFFLE_EVENT, (event) => {
-      setTimeout(() => { slotMachine.shuffle(5) }, event.detail.delay);
+      setTimeout(() => {
+        spinningReelSound.play();
+        slotMachine.shuffle(5, onComplete);
+      },
+      event.detail.delay
+      );
     });
   });
 
