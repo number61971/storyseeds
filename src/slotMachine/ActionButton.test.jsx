@@ -2,13 +2,19 @@ import React, { Fragment } from 'react';
 import { shallow } from 'enzyme';
 import Button from '@material-ui/core/Button';
 import ActionButton from './ActionButton';
-import shuffleEventModule from './shuffleEvent';
+import shuffleActionModule from './shuffleAction';
 
 describe('ActionButton', () => {
-  let button, props, wrapper;
+  let button, props, shuffleActions, wrapper;
 
   beforeEach(() => {
-    shuffleEventModule.shuffleEvent = jest.fn((value) => `Received ${value}`);
+    shuffleActionModule.onMouseDownSound = { play: jest.fn() };
+    shuffleActionModule.onMouseUpSound = { play: jest.fn() };
+
+    shuffleActions = [];
+    shuffleActionModule.shuffleAction = jest.fn((id, delay) => {
+      shuffleActions.push({ id, delay });
+    });
 
     props = {
       slotReelIds: ['slot1', 'slot2'],
@@ -26,9 +32,6 @@ describe('ActionButton', () => {
 
   describe('when no buttonLabel property is supplied', () => {
     it('defaults the button label to "Shuffle!"', () => {
-      props = {
-        slotReelIds: ['slot1', 'slot2'],
-      };
       wrapper = shallow(<ActionButton { ...props } />);
       button = wrapper.find(Button);
 
@@ -36,7 +39,15 @@ describe('ActionButton', () => {
     });
   });
 
-  // TODO: Challenging because of direct DOM manipulation
-  //it('dispatches a shuffleEvent for each SlotReel when clicked', () => {
-  //});
+  it('dispatches a shuffleAction for each SlotReel when clicked', () => {
+    wrapper = shallow(<ActionButton { ...props } />);
+    button = wrapper.find(Button);
+    const clickHandler = button.props().onMouseUp;
+    clickHandler({});
+
+    expect(shuffleActions).toEqual([
+      { id: props.slotReelIds[0], delay: 0 },
+      { id: props.slotReelIds[1], delay: 500 }
+    ]);
+  });
 });

@@ -1,28 +1,24 @@
 import React from 'react';
 import Box from '@material-ui/core/Box';
 import Button from '@material-ui/core/Button';
-import shuffleEventModule from './shuffleEvent';
+import shuffleActionModule from './shuffleAction';
 
 function ActionButton(props) {
   const { slotReelIds } = props;
   const buttonLabel = props.buttonLabel || 'Shuffle!';
-  const onMouseDownSound = new Audio('/audio/button_press.mp3');
-  const onMouseUpSound = new Audio('/audio/button_up.mp3');
 
   const mouseDownHandler = (_event) => {
-    onMouseDownSound.play();
+    shuffleActionModule.onMouseDownSound.play();
+  }
+
+  const shuffle = (elementId, delayFactor) => {
+    const delay = delayFactor * 500;
+    shuffleActionModule.shuffleAction(elementId, delay);
   }
 
   const clickHandler = (_event) => {
-    onMouseUpSound.play();
-
-    slotReelIds.forEach((id, index) => {
-      const delay = index * 500;
-      const slotReelElem = document.querySelector(`#${id}`);
-      slotReelElem.dispatchEvent(
-        shuffleEventModule.shuffleEvent(delay)
-      );
-    });
+    shuffleActionModule.onMouseUpSound.play();
+    slotReelIds.forEach((id, index) => { shuffle(id, index) });
   };
 
   return (
