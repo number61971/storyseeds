@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Box from '@material-ui/core/Box';
-import randomIndex from './random';
-import { SHUFFLE_EVENT } from './shuffleEvent';
+import slotReelConfigModule from './slotReelConfig';
 
 const useStyles = makeStyles((theme) => {
   return {
@@ -27,33 +26,10 @@ const useStyles = makeStyles((theme) => {
 });
 
 function SlotReel(props) {
-  useEffect(() => {
-    const { id, items } = props;
-
-    const config = {
-      active: randomIndex(0, items.length),
-    };
-
-    const slotMachineElem = document.querySelector(`#${id}`);
-    const slotMachine = new window.SlotMachine(slotMachineElem, config);
-
-    const spinningReelSound = new Audio('/audio/spinning_reel.mp3');
-
-    const spinStopSound = new Audio('/audio/slot_stop.mp3');
-    const onComplete = () => { spinStopSound.play() };
-
-    slotMachineElem.addEventListener(SHUFFLE_EVENT, (event) => {
-      setTimeout(() => {
-        spinningReelSound.play();
-        slotMachine.shuffle(5, onComplete);
-      },
-      event.detail.delay
-      );
-    });
-  });
-
-  const classes = useStyles();
   const { id, items } = props;
+  const classes = useStyles();
+
+  useEffect(() => { slotReelConfigModule.setup(id, items) });
 
   return (
     <Box id={id} className={classes.slotReel}>

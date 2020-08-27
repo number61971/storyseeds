@@ -1,14 +1,27 @@
-import React, { useEffect } from 'react';
-import { shallow } from 'enzyme';
+import React from 'react';
+import { mount, shallow } from 'enzyme';
 import SlotReel from './SlotReel';
+import slotReelConfigModule from './slotReelConfig';
 
 describe('SlotReel', () => {
-  it('renders a slot reel for each set of supplied properties', () => {
-    const props = {
+  let props, wrapper;
+
+  beforeEach(() => {
+    slotReelConfigModule.setup = jest.fn();
+
+    props = {
       id: 'slot1', 
       items: ['master shake', 'meatwad', 'frylock'],
     };
-    const wrapper = shallow(<SlotReel { ...props } />);
+  });
+
+  it('configures the SlotReels', () => {
+    wrapper = mount(<SlotReel { ...props } />);
+    expect(slotReelConfigModule.setup).toHaveBeenCalledWith(props.id, props.items);
+  });
+
+  it('renders a slot reel for each set of supplied properties', () => {
+    wrapper = shallow(<SlotReel { ...props } />);
 
     const slotReelContainer = wrapper.first();
     expect(slotReelContainer.props().id).toEqual(props.id);
@@ -20,9 +33,4 @@ describe('SlotReel', () => {
     expect(items.at(1).text()).toEqual(props.items[1]);
     expect(items.at(2).text()).toEqual(props.items[2]);
   });
-
-  // TODO: Challenging because of direct DOM manipulation, including use of
-  // functional globally attached to the window object
-  //it('listens for the SHUFFLE_EVENT', () => {
-  //});
 });
