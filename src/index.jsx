@@ -28,7 +28,7 @@ ReactDOM.render(
       <App />
     </MuiThemeProvider>
   </React.StrictMode>,
-  document.getElementById('root')
+  document.getElementById('storyseeds-root')
 );
 
 // If you want your app to work offline and load faster, you can change
